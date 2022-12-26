@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Reaction Project</title>
+</head>
+
+<style>
+
+body{
+
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.notice{
+
+    font-size: 18px;
+}
+.time {
+    font-weight: bold;
+    font-size: 20px;
+}
+    .color{
+        color:red;
+        background-color: red;
+        display: none;
+        position:relative;
+        
+    }
+    #circle{
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+    #square{
+        width: 100px;
+        height: 100px;
+        
+    }
+</style>
+
+
+<body>
+
+
+    <h1>Test Your Reaction Time..!!!</h1>
+    <p class ="notice">Click on Object As Fast As Possiable...!!!
+    </p>
+    <div id ="circle" class="color" ></div>
+
+    
+<p class ="time">Your time is: <span id ='timetaken'></span></p>
+
+
+
+    <script>
+        function getRandomColor(){
+        var letter ='1234567890ABCDEFGH'.split('');
+        var color ="#";
+ 
+            for(var i =0;i<6;i++){
+             color += letter[Math.floor(Math.random()*16)];
+            }
+                    return color;
+                }
+        
+        var start = new Date().getTime();
+        function makeShapeDisappear(){
+
+            var top = Math.random()*400;
+            var left = Math.random()*400;
+            var width= Math.random()*200 +100;
+            if(Math.random()>.5){
+                document.getElementById("circle").style.borderRadius="50%"
+            }
+            else{
+                document.getElementById("circle").style.borderRadious="0";
+            }
+            document.getElementById("circle").style.backgroundColor=getRandomColor();
+            document.getElementById("circle").style.height=width +"px"
+            document.getElementById("circle").style.width=width +"px"
+            document.getElementById("circle").style.top=top +"px"
+            document.getElementById("circle").style.left=left +"px"
+            document.getElementById("circle").style.display="block";
+            start = new Date().getTime();
+        }
+
+        function appearAfterDelay(){
+            setTimeout(makeShapeDisappear, Math.random() * 2000);
+
+        }
+
+        
+        appearAfterDelay();
+
+    document.getElementById("circle").onclick=function(){
+    document.getElementById("circle").style.display="none";
+    var end = new Date().getTime();
+    var timetaken = (end-start)/1000;
+    
+    document.getElementById("timetaken").innerHTML=(timetaken+" Seconds");
+    appearAfterDelay();
+    
+}
+
+</script>
+    
+</body>
+</html>
